@@ -28,5 +28,7 @@ public class MainActivity extends Activity {
         mainControl.cadastrarAction();
     }
 
-    public void recuperarSenha(View view){}
+    public void recuperarSenha(View view){
+        mainControl.recuperarAction();
+    }
 }

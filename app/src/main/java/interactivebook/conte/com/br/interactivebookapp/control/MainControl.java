@@ -10,6 +10,7 @@ import interactivebook.conte.com.br.interactivebookapp.model.Usuario;
 import interactivebook.conte.com.br.interactivebookapp.resource.LoginResource;
 import interactivebook.conte.com.br.interactivebookapp.view.CadastrarActivity;
 import interactivebook.conte.com.br.interactivebookapp.view.LobbyActivity;
+import interactivebook.conte.com.br.interactivebookapp.view.PasswdRecoverActivity;
 
 public class MainControl {
 
@@ -28,21 +29,29 @@ public class MainControl {
     }
 
     public void userValidator(){
+        usuario = null;
+
         String e = email.getText().toString();
         String s = senha.getText().toString();
 
         usuario = loginResource.verificaUsuario(e,s);
+
         if(usuario != null){
             Intent it = new Intent(activity, LobbyActivity.class);
             it.putExtra("user", usuario);
-            activity.startActivityForResult(it, 777);
+            activity.startActivity(it);
         } else {
-            Toast.makeText(activity, "Erro no login", Toast.LENGTH_SHORT).show();
+            Toast.makeText(activity, "Erro ao efetuar login", Toast.LENGTH_SHORT).show();
         }
     }
 
     public void cadastrarAction(){
         Intent it = new Intent(activity, CadastrarActivity.class);
-        activity.startActivityForResult(it, 777);
+        activity.startActivity(it);
+    }
+
+    public void recuperarAction(){
+        Intent it = new Intent(activity, PasswdRecoverActivity.class);
+        activity.startActivity(it);
     }
 }

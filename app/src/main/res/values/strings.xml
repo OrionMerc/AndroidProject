@@ -6,7 +6,7 @@
     <string name="hint_senha">Senha</string>
     <string name="confirma_senha">Confirmar senha</string>
     <string name="hint_confirma_senha">Senha</string>
-    <string name="recuperar_senha">Recuperar Senha</string>
+    <string name="recuperar_senha">Esqueci a senha</string>
     <string name="button_entrar">Entrar</string>
     <string name="nome">Nome</string>
     <string name="hint_nome">Digite seu nome</string>
@@ -15,4 +15,7 @@
     <string name="button_cadastrar">Cadastrar</string>
     <string name="button_cancelar">Cancelar</string>
     <string name="button_cadastrese">Cadastre-se</string>
+    <string name="button_recuperar">Recuperar</string>
+    <string name="button_voltar">Voltar</string>
+    <string name="recuperar">Esqueci a senha</string>
 </resources>

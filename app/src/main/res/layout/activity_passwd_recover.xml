@@ -8,7 +8,7 @@
     android:padding="16dp"
     android:background="@drawable/borda_login"
     android:backgroundTint="@android:color/white"
-    tools:context=".view.MainActivity">
+    tools:context=".view.PasswdRecoverActivity">
 
     <ImageView
         android:layout_width="match_parent"
@@ -18,7 +18,7 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/email"
+        android:text="@string/recuperar"
         android:textSize="20dp"
         android:textColor="#3d5d7c"
         android:layout_marginTop="16dp"/>
@@ -26,70 +26,40 @@
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="16dp"
         android:padding="2dp"
         android:hint="@string/hint_email"
         android:background="@drawable/borda_login"
-        android:id="@+id/edit_text_email"
+        android:id="@+id/edit_text_recover_email"
         android:textSize="20dp"
         android:textColor="#3d5d7c"/>
-
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:text="@string/senha"
-        android:textSize="20dp"
-        android:textColor="#3d5d7c"/>
-
-    <EditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:padding="2dp"
-        android:inputType="textPassword"
-        android:hint="@string/hint_senha"
-        android:textSize="20dp"
-        android:textColor="#3d5d7c"
-        android:id="@+id/edit_text_senha"
-        android:background="@drawable/borda_login"/>
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="right"
-        android:layout_marginTop="10dp"
-        android:text="@string/recuperar_senha"
-        android:textSize="14dp"
-        android:textColor="#3d5d7c"
-        android:onClick="recuperarSenha"/>
 
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:text="@string/button_entrar"
+        android:text="@string/button_recuperar"
         android:textSize="20dp"
         android:textColor="@android:color/white"
         android:padding="10dp"
         android:background="#3d5d7c"
-        android:onClick="entrar"/>
+        android:onClick="recuperar"/>
 
     <Button
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:layout_gravity="center"
-        android:text="@string/button_cadastrese"
+        android:text="@string/button_voltar"
         android:textSize="20dp"
-        android:textColor="#3d5d7c"
-        android:background="@drawable/borda_login"
+        android:textColor="@android:color/white"
         android:padding="10dp"
-        android:onClick="cadastrese"/>
+        android:background="#3d5d7c"
+        android:onClick="voltar"/>
 
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="50dp"
         android:src="@drawable/gatos"/>
+
 </LinearLayout>
