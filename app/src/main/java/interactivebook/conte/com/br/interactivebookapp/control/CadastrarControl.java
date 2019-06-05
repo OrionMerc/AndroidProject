@@ -2,6 +2,7 @@ package interactivebook.conte.com.br.interactivebookapp.control;
 
 import android.app.Activity;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import interactivebook.conte.com.br.interactivebookapp.R;
 import interactivebook.conte.com.br.interactivebookapp.model.Usuario;
@@ -38,28 +39,39 @@ public class CadastrarControl {
 
             if(email.getText().toString() != null || email.getText().toString() != ""){
                 user.setEmail(email.getText().toString());
-
-                if(nome.getText().toString() != null || nome.getText().toString() != "") {
-                    user.setNome(nome.getText().toString());
-
-                    if(sobrenome.getText().toString() != null || sobrenome.getText().toString() != ""){
-                        user.setSobrenome(sobrenome.getText().toString());
-
-                        usuario = usuarioResource.cadastrarUsuario(this.activity.getApplicationContext(), user);
-                    } else {
-                        return;
-                    }
-                } else {
-                    return;
-                }
             } else {
+                Toast.makeText(activity, "E-mail invalido", Toast.LENGTH_SHORT).show();
                 return;
             }
+
+            if(nome.getText().toString() != null || nome.getText().toString() != "") {
+                user.setNome(nome.getText().toString());
+
+
+            } else {
+                Toast.makeText(activity, "Digite seu nome", Toast.LENGTH_SHORT).show();
+                return;
+            }
+
+            if(sobrenome.getText().toString() != null || sobrenome.getText().toString() != ""){
+                user.setSobrenome(sobrenome.getText().toString());
+            } else {
+                Toast.makeText(activity, "Digite seu sobrenome", Toast.LENGTH_SHORT).show();
+                return;
+            }
+
         } else {
+            Toast.makeText(activity, "Senha incorreta", Toast.LENGTH_SHORT).show();
             return;
         }
-        if(usuario != null){
+
+        try {
+            usuario = usuarioResource.cadastrarUsuario(this.activity.getApplicationContext(), user);
+            Toast.makeText(activity, "Cadastrado com sucesso!", Toast.LENGTH_SHORT).show();
             this.activity.finish();
+        } catch (Exception e) {
+            Toast.makeText(activity, "Falha ao cadastrar usuario", Toast.LENGTH_SHORT).show();
+            return;
         }
     }
 
