@@ -8,6 +8,7 @@ import android.widget.Toast;
 import interactivebook.conte.com.br.interactivebookapp.R;
 import interactivebook.conte.com.br.interactivebookapp.model.Usuario;
 import interactivebook.conte.com.br.interactivebookapp.resource.LoginResource;
+import interactivebook.conte.com.br.interactivebookapp.view.CadastrarActivity;
 import interactivebook.conte.com.br.interactivebookapp.view.LobbyActivity;
 
 public class MainControl {
@@ -38,5 +39,10 @@ public class MainControl {
         } else {
             Toast.makeText(activity, "Erro no login", Toast.LENGTH_SHORT).show();
         }
+    }
+
+    public void cadastrarAction(){
+        Intent it = new Intent(activity, CadastrarActivity.class);
+        activity.startActivityForResult(it, 777);
     }
 }

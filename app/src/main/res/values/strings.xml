@@ -1,12 +1,18 @@
 <resources>
-    <string name="facebook_app_id">410781422981362</string>
-    <string name="fb_login_protocol_scheme">fb410781422981362</string>
     <string name="app_name">InteractiveBookApp</string>
     <string name="email">E-mail</string>
     <string name="hint_email">E-mail</string>
     <string name="senha">Senha</string>
     <string name="hint_senha">Senha</string>
+    <string name="confirma_senha">Confirmar senha</string>
+    <string name="hint_confirma_senha">Senha</string>
     <string name="recuperar_senha">Recuperar Senha</string>
     <string name="button_entrar">Entrar</string>
+    <string name="nome">Nome</string>
+    <string name="hint_nome">Digite seu nome</string>
+    <string name="sobrenome">Sobrenome</string>
+    <string name="hint_sobrenome">Digite seu sobrenome</string>
+    <string name="button_cadastrar">Cadastrar</string>
+    <string name="button_cancelar">Cancelar</string>
     <string name="button_cadastrese">Cadastre-se</string>
 </resources>

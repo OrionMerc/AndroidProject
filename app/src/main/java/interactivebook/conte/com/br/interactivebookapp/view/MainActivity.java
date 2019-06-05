@@ -24,7 +24,9 @@ public class MainActivity extends Activity {
         mainControl.userValidator();
     }
 
-    public void cadastrese(View view){}
+    public void cadastrese(View view){
+        mainControl.cadastrarAction();
+    }
 
     public void recuperarSenha(View view){}
 }
