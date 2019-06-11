@@ -5,7 +5,13 @@ import android.content.Intent;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.j256.ormlite.dao.Dao;
+
+import java.sql.SQLException;
+
 import interactivebook.conte.com.br.interactivebookapp.R;
+import interactivebook.conte.com.br.interactivebookapp.dao.MyORMLiteHelper;
+import interactivebook.conte.com.br.interactivebookapp.dao.UsuarioDao;
 import interactivebook.conte.com.br.interactivebookapp.model.Usuario;
 import interactivebook.conte.com.br.interactivebookapp.resource.LoginResource;
 import interactivebook.conte.com.br.interactivebookapp.view.CadastrarActivity;
@@ -13,6 +19,10 @@ import interactivebook.conte.com.br.interactivebookapp.view.LobbyActivity;
 import interactivebook.conte.com.br.interactivebookapp.view.PasswdRecoverActivity;
 
 public class MainControl {
+
+    private Dao<Usuario, Integer> usuarioDao;
+    private UsuarioDao usuarioOrmDao;
+    private MyORMLiteHelper helper;
 
     private Activity activity;
     private LoginResource loginResource;
@@ -24,8 +34,17 @@ public class MainControl {
         this.activity = activity;
         this.loginResource = new LoginResource();
 
+        this.helper = new MyORMLiteHelper(activity);
+        this.usuarioOrmDao = new UsuarioDao(this.helper);
+
         this.email = activity.findViewById(R.id.edit_text_email);
         this.senha = activity.findViewById(R.id.edit_text_senha);
+
+        try{
+            usuarioDao = usuarioOrmDao.getProdutoDao();
+        } catch (SQLException e){
+            e.printStackTrace();
+        }
     }
 
     public void userValidator(){
@@ -37,6 +56,12 @@ public class MainControl {
         usuario = loginResource.verificaUsuario(e,s);
 
         if(usuario != null){
+            try{
+                usuarioDao.create(usuario);
+                Toast.makeText(activity, "Salvo no BD", Toast.LENGTH_SHORT).show();
+            }catch(SQLException ex){
+                ex.printStackTrace();
+            }
             Intent it = new Intent(activity, LobbyActivity.class);
             it.putExtra("user", usuario);
             activity.startActivity(it);

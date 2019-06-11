@@ -9,7 +9,7 @@ import interactivebook.conte.com.br.interactivebookapp.model.Usuario;
 
 public class LoginResource {
 
-    private static final String BASE_URL = "http://192.168.2.150:8080/";
+    private static final String BASE_URL = "http://192.168.110.115:8080/";
     private static final String URL = "login/";
     private AsyncHttpClient client;
     private Usuario usuario;

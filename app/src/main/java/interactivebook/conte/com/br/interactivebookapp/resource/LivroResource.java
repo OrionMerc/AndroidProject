@@ -1,34 +1,40 @@
 package interactivebook.conte.com.br.interactivebookapp.resource;
 
+import com.google.gson.Gson;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.AsyncHttpResponseHandler;
 
 import cz.msebera.android.httpclient.Header;
+import interactivebook.conte.com.br.interactivebookapp.model.Livro;
+import interactivebook.conte.com.br.interactivebookapp.model.Usuario;
 
-public class PasswdRecoverResource {
+public class LivroResource {
 
     private static final String BASE_URL = "http://192.168.110.115:8080/";
-    private static final String URL = "recover/";
+    private static final String URL = "livro/";
     private AsyncHttpClient client;
-    private boolean result;
+    private Livro livro;
 
-    public boolean userRecover(String email){
+    public Livro buscaLivroPorId(Long id){
         client = new AsyncHttpClient();
-        result = true;
 
-        client.get(BASE_URL + URL + email, new AsyncHttpResponseHandler() {
+        client.get(BASE_URL + URL + id, new AsyncHttpResponseHandler() {
 
             @Override
             public void onSuccess(int i, Header[] headers, byte[] bytes) {
-                result = true;
+
+                String resJSON = new String(bytes);
+                //Usuario usuario;
+                Gson gson = new Gson();
+                livro = gson.fromJson(resJSON, Livro.class);
             }
 
             @Override
             public void onFailure(int i, Header[] headers, byte[] bytes, Throwable throwable) {
-                result = false;
+                livro = null;
             }
         });
 
-        return result;
+        return livro;
     }
 }
