@@ -17,7 +17,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textSize="36dp"
-            android:id="@+id/user_text_view"/>
+            android:id="@+id/lobby_user_text_view"/>
 
         <TextView
             android:layout_width="match_parent"
@@ -25,11 +25,10 @@
             android:text="Livro:"
             android:textSize="24dp"/>
 
-        <ListView
+        <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/listview">
-
-        </ListView>
+            android:textSize="24dp"
+            android:id="@+id/lobby_livro_text_view"/>
     </LinearLayout>
 </ScrollView>

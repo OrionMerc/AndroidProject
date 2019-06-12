@@ -32,7 +32,7 @@ public class MainControl {
 
     public MainControl(Activity activity){
         this.activity = activity;
-        this.loginResource = new LoginResource();
+        this.loginResource = new LoginResource(this.activity);
 
         this.helper = new MyORMLiteHelper(activity);
         this.usuarioOrmDao = new UsuarioDao(this.helper);
@@ -53,21 +53,7 @@ public class MainControl {
         String e = email.getText().toString();
         String s = senha.getText().toString();
 
-        usuario = loginResource.verificaUsuario(e,s);
-
-        if(usuario != null){
-            try{
-                usuarioDao.create(usuario);
-                Toast.makeText(activity, "Salvo no BD", Toast.LENGTH_SHORT).show();
-            }catch(SQLException ex){
-                ex.printStackTrace();
-            }
-            Intent it = new Intent(activity, LobbyActivity.class);
-            it.putExtra("user", usuario);
-            activity.startActivity(it);
-        } else {
-            Toast.makeText(activity, "Erro ao efetuar login", Toast.LENGTH_SHORT).show();
-        }
+        loginResource.verificaUsuario(e,s);
     }
 
     public void cadastrarAction(){
