@@ -66,7 +66,7 @@ public class CadastrarControl {
         }
 
         try {
-            usuarioResource.cadastrarUsuario(this.activity.getApplicationContext(), user);
+            usuarioResource.cadastrarUsuario(user);
         } catch (Exception e) {
             Toast.makeText(activity, "Falha ao cadastrar usuario", Toast.LENGTH_SHORT).show();
             return;

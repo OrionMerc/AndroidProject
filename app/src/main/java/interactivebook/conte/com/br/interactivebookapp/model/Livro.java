@@ -55,4 +55,8 @@ public class Livro implements Serializable {
         this.paginas = paginas;
     }
 
+    @Override
+    public String toString() {
+        return "Livro: " +  this.nome;
+    }
 }

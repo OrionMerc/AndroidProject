@@ -49,7 +49,7 @@ public class UsuarioResource {
         });
     }
 
-    public void cadastrarUsuario(Context c, Usuario u){
+    public void cadastrarUsuario(Usuario u){
         StringEntity entity=null;
         try {
             Gson g = new Gson();
@@ -59,7 +59,7 @@ public class UsuarioResource {
         }
 
         client = new AsyncHttpClient();
-        client.post(c, BASE_URL + URL, entity, "application/json", new AsyncHttpResponseHandler() {
+        client.post(activity.getApplicationContext(), BASE_URL + URL, entity, "application/json", new AsyncHttpResponseHandler() {
             @Override
             public void onSuccess(int i, Header[] headers, byte[] bytes) {
                 String resJSON = new String(bytes);
