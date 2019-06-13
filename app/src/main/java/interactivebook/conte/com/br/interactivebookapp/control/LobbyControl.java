@@ -30,7 +30,7 @@ public class LobbyControl {
         this.activity = activity;
 
         userTextView = this.activity.findViewById(R.id.lobby_user_text_view);
-        livroTextView = this.activity.findViewById(R.id.lobby_livro_text_view);
+        //livroTextView = this.activity.findViewById(R.id.lobby_livro_text_view);
 
         livroResource = new LivroResource();
 

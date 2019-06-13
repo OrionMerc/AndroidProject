@@ -22,7 +22,7 @@ public class CadastrarControl {
 
     public CadastrarControl(Activity activity){
         this.activity = activity;
-        this.usuarioResource = new UsuarioResource();
+        this.usuarioResource = new UsuarioResource(this.activity);
 
         this.nome = activity.findViewById(R.id.edit_text_nome);
         this.sobrenome = activity.findViewById(R.id.edit_text_sobrenome);
@@ -66,9 +66,7 @@ public class CadastrarControl {
         }
 
         try {
-            usuario = usuarioResource.cadastrarUsuario(this.activity.getApplicationContext(), user);
-            Toast.makeText(activity, "Cadastrado com sucesso!", Toast.LENGTH_SHORT).show();
-            this.activity.finish();
+            usuarioResource.cadastrarUsuario(this.activity.getApplicationContext(), user);
         } catch (Exception e) {
             Toast.makeText(activity, "Falha ao cadastrar usuario", Toast.LENGTH_SHORT).show();
             return;

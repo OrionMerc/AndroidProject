@@ -5,12 +5,13 @@ import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.AsyncHttpResponseHandler;
 
 import cz.msebera.android.httpclient.Header;
+import interactivebook.conte.com.br.interactivebookapp.config.ApiParams;
 import interactivebook.conte.com.br.interactivebookapp.model.Livro;
 import interactivebook.conte.com.br.interactivebookapp.model.Usuario;
 
 public class LivroResource {
 
-    private static final String BASE_URL = "http://192.168.110.115:8080/";
+    private static final String BASE_URL = ApiParams.getURL();
     private static final String URL = "livro/";
     private AsyncHttpClient client;
     private Livro livro;

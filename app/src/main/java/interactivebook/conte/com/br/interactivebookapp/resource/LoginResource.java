@@ -10,12 +10,13 @@ import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.loopj.android.http.SyncHttpClient;
 
 import cz.msebera.android.httpclient.Header;
+import interactivebook.conte.com.br.interactivebookapp.config.ApiParams;
 import interactivebook.conte.com.br.interactivebookapp.model.Usuario;
 import interactivebook.conte.com.br.interactivebookapp.view.LobbyActivity;
 
 public class LoginResource {
 
-    private static final String BASE_URL = "http://192.168.110.115:8080/";
+    private static final String BASE_URL = ApiParams.getURL();
     private static final String URL = "login";
     private AsyncHttpClient client;
     private Usuario usuario;

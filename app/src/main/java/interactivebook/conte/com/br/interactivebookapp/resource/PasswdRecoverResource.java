@@ -4,10 +4,11 @@ import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.AsyncHttpResponseHandler;
 
 import cz.msebera.android.httpclient.Header;
+import interactivebook.conte.com.br.interactivebookapp.config.ApiParams;
 
 public class PasswdRecoverResource {
 
-    private static final String BASE_URL = "http://192.168.110.115:8080/";
+    private static final String BASE_URL = ApiParams.getURL();
     private static final String URL = "recover/";
     private AsyncHttpClient client;
     private boolean result;
