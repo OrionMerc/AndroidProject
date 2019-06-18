@@ -1,6 +1,7 @@
 package interactivebook.conte.com.br.interactivebookapp.control;
 
 import android.app.Activity;
+import android.support.v4.widget.DrawerLayout;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -24,6 +25,8 @@ public class LobbyControl {
     private ArrayAdapter<Livro> livrosAdapter;
     private TextView userTextView;
     private ListView livrosListView;
+    private TextView headerUserTextView;
+    private TextView headerEmailTextView;
 
 
     public LobbyControl(Activity activity){
@@ -32,6 +35,13 @@ public class LobbyControl {
         userTextView = this.activity.findViewById(R.id.lobby_user_text_view);
         livrosListView = this.activity.findViewById(R.id.lobby_livro_listview);
 
+        try {
+            headerUserTextView = this.activity.findViewById(R.id.nav_header_user_textView);
+            headerEmailTextView = this.activity.findViewById(R.id.nav_header_email_textView);
+        }catch (Exception e){
+            System.out.print("Erro: ");
+            System.out.println(e.toString());
+        }
         livroResource = new LivroResource();
 
         getUserData();
@@ -41,6 +51,8 @@ public class LobbyControl {
         this.usuario = (Usuario) this.activity.getIntent().getSerializableExtra("user");
 
         this.userTextView.setText("Bem vindo, " + usuario.getNome() + " " + usuario.getSobrenome());
+        //this.headerUserTextView.setText(usuario.getNome() + " " + usuario.getSobrenome());
+        //this.headerEmailTextView.setText(usuario.getEmail());
 
         getLivroFromAPI();
     }
