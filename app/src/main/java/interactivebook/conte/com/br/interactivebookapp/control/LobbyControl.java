@@ -1,7 +1,10 @@
 package interactivebook.conte.com.br.interactivebookapp.control;
 
 import android.app.Activity;
+import android.support.design.widget.NavigationView;
 import android.support.v4.widget.DrawerLayout;
+import android.view.LayoutInflater;
+import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -28,21 +31,24 @@ public class LobbyControl {
     private TextView headerUserTextView;
     private TextView headerEmailTextView;
 
-
+    View rootViewHeader;
     public LobbyControl(Activity activity){
         this.activity = activity;
 
         userTextView = this.activity.findViewById(R.id.lobby_user_text_view);
         livrosListView = this.activity.findViewById(R.id.lobby_livro_listview);
 
+        LayoutInflater inflater = LayoutInflater.from(this.activity);
+        rootViewHeader = inflater.inflate(R.layout.activity_lobby_nav_header, null);
         try {
-            headerUserTextView = this.activity.findViewById(R.id.nav_header_user_textView);
-            headerEmailTextView = this.activity.findViewById(R.id.nav_header_email_textView);
+            NavigationView nv = activity.findViewById(R.id.navView);
+            headerUserTextView = nv.getHeaderView(0).findViewById(R.id.nav_header_user_textView);
+            headerEmailTextView = nv.getHeaderView(0).findViewById(R.id.nav_header_email_textView);
         }catch (Exception e){
             System.out.print("Erro: ");
             System.out.println(e.toString());
         }
-        livroResource = new LivroResource();
+        livroResource = new LivroResource(this.activity);
 
         getUserData();
     }
@@ -51,8 +57,8 @@ public class LobbyControl {
         this.usuario = (Usuario) this.activity.getIntent().getSerializableExtra("user");
 
         this.userTextView.setText("Bem vindo, " + usuario.getNome() + " " + usuario.getSobrenome());
-        //this.headerUserTextView.setText(usuario.getNome() + " " + usuario.getSobrenome());
-        //this.headerEmailTextView.setText(usuario.getEmail());
+        this.headerUserTextView.setText(usuario.getNome() + " " + usuario.getSobrenome());
+        this.headerEmailTextView.setText(usuario.getEmail());
 
         getLivroFromAPI();
     }
@@ -60,14 +66,14 @@ public class LobbyControl {
     private void getLivroFromAPI(){
 
         try {
-            //this.livro = livroResource.buscaLivroPorId(1L);
-
             livrosAdapter = new ArrayAdapter<>(
                     activity,
                     android.R.layout.simple_spinner_item,
-                    testGetLivros()
+                    new ArrayList<Livro>()
             );
             livrosListView.setAdapter(livrosAdapter);
+
+            livroResource.buscaLivroPorId(1L, livrosAdapter);
 
         } catch (Exception e){
             Toast.makeText(activity, "Falha ao buscar livro", Toast.LENGTH_SHORT).show();

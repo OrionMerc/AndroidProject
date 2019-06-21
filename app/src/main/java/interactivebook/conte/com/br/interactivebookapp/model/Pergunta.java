@@ -17,8 +17,10 @@ public class Pergunta implements Serializable {
     @DatabaseField(canBeNull = false, width = 45)
     private String conteudo;
 
+    private List<Resposta> respostas;
+
     @ForeignCollectionField(eager = true)
-    private Collection<Resposta> respostas;
+    private Collection<Resposta> respostasCollection;
 
     public Long getId() {
         return id;
@@ -36,11 +38,19 @@ public class Pergunta implements Serializable {
         this.conteudo = conteudo;
     }
 
-    public Collection<Resposta> getRespostas() {
+    public List<Resposta> getRespostas() {
         return respostas;
     }
 
-    public void setRespostas(Collection<Resposta> respostas) {
+    public void setRespostas(List<Resposta> respostas) {
         this.respostas = respostas;
+    }
+
+    public Collection<Resposta> getRespostasCollection() {
+        return respostasCollection;
+    }
+
+    public void setRespostasCollection(Collection<Resposta> respostasCollection) {
+        this.respostasCollection = respostasCollection;
     }
 }

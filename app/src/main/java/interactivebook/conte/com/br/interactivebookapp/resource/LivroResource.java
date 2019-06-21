@@ -1,5 +1,9 @@
 package interactivebook.conte.com.br.interactivebookapp.resource;
 
+import android.app.Activity;
+import android.widget.ArrayAdapter;
+import android.widget.Toast;
+
 import com.google.gson.Gson;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.AsyncHttpResponseHandler;
@@ -15,8 +19,14 @@ public class LivroResource {
     private static final String URL = "livro/";
     private AsyncHttpClient client;
     private Livro livro;
+    private String resJSON;
+    private Activity activity;
 
-    public Livro buscaLivroPorId(Long id){
+    public LivroResource(Activity activity) {
+        this.activity = activity;
+    }
+
+    public void buscaLivroPorId(Long id, final ArrayAdapter<Livro> livrosAdapter){
         client = new AsyncHttpClient();
 
         client.get(BASE_URL + URL + id, new AsyncHttpResponseHandler() {
@@ -24,18 +34,18 @@ public class LivroResource {
             @Override
             public void onSuccess(int i, Header[] headers, byte[] bytes) {
 
-                String resJSON = new String(bytes);
+                resJSON = new String(bytes);
                 //Usuario usuario;
                 Gson gson = new Gson();
                 livro = gson.fromJson(resJSON, Livro.class);
+                livrosAdapter.add(livro);
             }
 
             @Override
             public void onFailure(int i, Header[] headers, byte[] bytes, Throwable throwable) {
                 livro = null;
+                Toast.makeText(activity, "ERRO", Toast.LENGTH_SHORT).show();
             }
         });
-
-        return livro;
     }
 }
