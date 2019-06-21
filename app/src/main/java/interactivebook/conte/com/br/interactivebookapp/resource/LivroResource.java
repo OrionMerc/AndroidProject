@@ -1,6 +1,7 @@
 package interactivebook.conte.com.br.interactivebookapp.resource;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.widget.ArrayAdapter;
 import android.widget.Toast;
 
@@ -21,13 +22,20 @@ public class LivroResource {
     private Livro livro;
     private String resJSON;
     private Activity activity;
+    private AlertDialog dlgCarregando;
 
     public LivroResource(Activity activity) {
         this.activity = activity;
+        dlgCarregando = (new AlertDialog.Builder(activity)).create();
+        dlgCarregando.setTitle("Aguarde");
+        dlgCarregando.setMessage("Requisitando banco de dados...");
+        dlgCarregando.setCanceledOnTouchOutside(false);
     }
 
     public void buscaLivroPorId(Long id, final ArrayAdapter<Livro> livrosAdapter){
         client = new AsyncHttpClient();
+
+        dlgCarregando.show();
 
         client.get(BASE_URL + URL + id, new AsyncHttpResponseHandler() {
 
@@ -39,12 +47,13 @@ public class LivroResource {
                 Gson gson = new Gson();
                 livro = gson.fromJson(resJSON, Livro.class);
                 livrosAdapter.add(livro);
+                dlgCarregando.dismiss();
             }
 
             @Override
             public void onFailure(int i, Header[] headers, byte[] bytes, Throwable throwable) {
                 livro = null;
-                Toast.makeText(activity, "ERRO", Toast.LENGTH_SHORT).show();
+                dlgCarregando.dismiss();
             }
         });
     }
