@@ -1,6 +1,7 @@
 package interactivebook.conte.com.br.interactivebookapp.resource;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Intent;
 import android.widget.Toast;
 
@@ -21,12 +22,19 @@ public class LoginResource {
     private AsyncHttpClient client;
     private Usuario usuario;
     private Activity activity;
+    private AlertDialog alertDialog;
 
     public LoginResource(Activity activity){
         this.activity = activity;
+        alertDialog = (new AlertDialog.Builder(activity)).create();
+        alertDialog.setTitle("Aguarde");
+        alertDialog.setMessage("Carregando");
+        alertDialog.setCanceledOnTouchOutside(false);
     }
 
     public void verificaUsuario(String email, String senha){
+
+        alertDialog.show();
         client = new AsyncHttpClient();
         // Inserir o header e testar na api
         client.get(BASE_URL + URL + "/" + email + "/" + senha, new AsyncHttpResponseHandler() {
@@ -39,6 +47,7 @@ public class LoginResource {
                 Gson gson = new Gson();
                 usuario = gson.fromJson(resJSON, Usuario.class);
 
+                alertDialog.dismiss();
                 if(usuario != null){
                     Intent it = new Intent(activity, LobbyActivity.class);
                     it.putExtra("user", usuario);
@@ -48,6 +57,7 @@ public class LoginResource {
 
             @Override
             public void onFailure(int i, Header[] headers, byte[] bytes, Throwable throwable) {
+                alertDialog.dismiss();
                 Toast.makeText(activity, "Erro ao efetuar login", Toast.LENGTH_SHORT).show();
             }
         });

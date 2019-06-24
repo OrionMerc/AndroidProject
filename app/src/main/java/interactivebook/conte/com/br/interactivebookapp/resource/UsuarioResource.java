@@ -1,6 +1,7 @@
 package interactivebook.conte.com.br.interactivebookapp.resource;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Context;
 import android.preference.PreferenceActivity;
 import android.widget.ArrayAdapter;
@@ -25,12 +26,19 @@ public class UsuarioResource {
     private AsyncHttpClient client;
     private Usuario usuario;
     private Activity activity;
+    private AlertDialog dlgCarregando;
 
     public UsuarioResource(Activity activity){
         this.activity = activity;
+        dlgCarregando = (new AlertDialog.Builder(activity)).create();
+        dlgCarregando.setTitle("Aguarde");
+        dlgCarregando.setMessage("Requisitando banco de dados...");
+        dlgCarregando.setCanceledOnTouchOutside(false);
     }
 
     public void getUsuario(final ArrayAdapter<Usuario> adapterCategoria){
+        dlgCarregando.show();
+
         client = new AsyncHttpClient();
         client.get(BASE_URL + URL, new AsyncHttpResponseHandler() {
             @Override
@@ -39,12 +47,12 @@ public class UsuarioResource {
                 Usuario usuario;
                 Gson gson = new Gson();
                 usuario = gson.fromJson(resJSON, Usuario.class);
-
+                dlgCarregando.dismiss();
             }
 
             @Override
             public void onFailure(int i, Header[] headers, byte[] bytes, Throwable throwable) {
-
+                dlgCarregando.dismiss();
             }
         });
     }

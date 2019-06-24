@@ -1,5 +1,10 @@
 package interactivebook.conte.com.br.interactivebookapp.resource;
 
+import android.app.Activity;
+import android.app.AlertDialog;
+import android.widget.ArrayAdapter;
+import android.widget.Toast;
+
 import com.google.gson.Gson;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.AsyncHttpResponseHandler;
@@ -15,27 +20,41 @@ public class LivroResource {
     private static final String URL = "livro/";
     private AsyncHttpClient client;
     private Livro livro;
+    private String resJSON;
+    private Activity activity;
+    private AlertDialog dlgCarregando;
 
-    public Livro buscaLivroPorId(Long id){
+    public LivroResource(Activity activity) {
+        this.activity = activity;
+        dlgCarregando = (new AlertDialog.Builder(activity)).create();
+        dlgCarregando.setTitle("Aguarde");
+        dlgCarregando.setMessage("Requisitando banco de dados...");
+        dlgCarregando.setCanceledOnTouchOutside(false);
+    }
+
+    public void buscaLivroPorId(Long id, final ArrayAdapter<Livro> livrosAdapter){
         client = new AsyncHttpClient();
+
+        dlgCarregando.show();
 
         client.get(BASE_URL + URL + id, new AsyncHttpResponseHandler() {
 
             @Override
             public void onSuccess(int i, Header[] headers, byte[] bytes) {
 
-                String resJSON = new String(bytes);
+                resJSON = new String(bytes);
                 //Usuario usuario;
                 Gson gson = new Gson();
                 livro = gson.fromJson(resJSON, Livro.class);
+                livrosAdapter.add(livro);
+                dlgCarregando.dismiss();
             }
 
             @Override
             public void onFailure(int i, Header[] headers, byte[] bytes, Throwable throwable) {
                 livro = null;
+                dlgCarregando.dismiss();
             }
         });
-
-        return livro;
     }
 }

@@ -5,6 +5,7 @@ import com.j256.ormlite.field.ForeignCollectionField;
 import com.j256.ormlite.table.DatabaseTable;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
@@ -20,11 +21,17 @@ public class Livro implements Serializable {
     @DatabaseField(canBeNull = false, width = 45)
     private String autor;
 
+    private List<Pagina> paginas;
+
     @ForeignCollectionField(eager = true)
-    private Collection<Pagina> paginas;
+    private Collection<Pagina> paginasCollection;
 
     public Long getId() {
         return id;
+    }
+
+    public List<Pagina> getLista(){
+        return new ArrayList<>(paginas);
     }
 
     public void setId(Long id) {
@@ -47,12 +54,20 @@ public class Livro implements Serializable {
         this.autor = autor;
     }
 
-    public Collection<Pagina> getPaginas() {
+    public List<Pagina> getPaginas() {
         return paginas;
     }
 
-    public void setPaginas(Collection<Pagina> paginas) {
+    public void setPaginas(List<Pagina> paginas) {
         this.paginas = paginas;
+    }
+
+    public Collection<Pagina> getPaginasCollection() {
+        return paginasCollection;
+    }
+
+    public void setPaginasCollection(Collection<Pagina> paginasCollection) {
+        this.paginasCollection = paginasCollection;
     }
 
     @Override
