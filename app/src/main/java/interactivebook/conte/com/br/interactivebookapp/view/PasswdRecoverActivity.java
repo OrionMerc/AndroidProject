@@ -19,6 +19,11 @@ public class PasswdRecoverActivity extends Activity {
         this.passwdRecoverControl = new PasswdRecoverControl(this);
     }
 
+    @Override
+    public void onBackPressed() {
+        //super.onBackPressed();
+    }
+
     public void recuperar(View view) {
         passwdRecoverControl.recuperarAction();
     }

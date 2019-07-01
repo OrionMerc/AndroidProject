@@ -11,7 +11,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".view.PasswdRecoverActivity"></activity>
+        <activity android:name=".view.ConfigActivity"></activity>
+        <activity android:name=".view.PasswdRecoverActivity" />
         <activity android:name=".view.CadastrarActivity" />
         <activity android:name=".view.LobbyActivity" />
         <activity android:name=".view.MainActivity">

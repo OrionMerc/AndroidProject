@@ -2,6 +2,7 @@ package interactivebook.conte.com.br.interactivebookapp.control;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.content.Intent;
 import android.support.design.widget.NavigationView;
 import android.support.v4.widget.DrawerLayout;
 import android.view.LayoutInflater;
@@ -18,6 +19,7 @@ import interactivebook.conte.com.br.interactivebookapp.R;
 import interactivebook.conte.com.br.interactivebookapp.model.Livro;
 import interactivebook.conte.com.br.interactivebookapp.model.Usuario;
 import interactivebook.conte.com.br.interactivebookapp.resource.LivroResource;
+import interactivebook.conte.com.br.interactivebookapp.view.ConfigActivity;
 
 public class LobbyControl {
 
@@ -75,10 +77,16 @@ public class LobbyControl {
             );
             livrosListView.setAdapter(livrosAdapter);
 
-            livroResource.buscaLivroPorId(1L, livrosAdapter);
+            livroResource.buscaLivroPorId(2L, livrosAdapter);
 
         } catch (Exception e){
             Toast.makeText(activity, "Falha ao buscar livro", Toast.LENGTH_SHORT).show();
         }
+    }
+
+    public void configActivityAction(){
+        Intent it = new Intent(activity, ConfigActivity.class);
+        it.putExtra("email", usuario.getEmail());
+        activity.startActivity(it);
     }
 }

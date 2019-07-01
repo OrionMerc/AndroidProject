@@ -19,6 +19,11 @@ public class CadastrarActivity extends Activity {
         cadastrarControl = new CadastrarControl(this);
     }
 
+    @Override
+    public void onBackPressed() {
+        //super.onBackPressed();
+    }
+
     public void cancelar(View view) {
         cadastrarControl.cancelarAction();
     }

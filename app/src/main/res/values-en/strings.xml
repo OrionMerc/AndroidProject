@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">InteractiveBookApp</string>
+    <string name="nav_menu_config">Settings</string>
+    <string name="nav_menu_logout">Logout</string>
+</resources>
