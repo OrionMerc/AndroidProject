@@ -77,7 +77,7 @@ public class LobbyControl {
             );
             livrosListView.setAdapter(livrosAdapter);
 
-            livroResource.buscaLivroPorId(2L, livrosAdapter);
+            livroResource.buscaTodosLivros(livrosAdapter);
 
         } catch (Exception e){
             Toast.makeText(activity, "Falha ao buscar livro", Toast.LENGTH_SHORT).show();
