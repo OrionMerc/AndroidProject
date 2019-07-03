@@ -1,24 +1,13 @@
 package interactivebook.conte.com.br.interactivebookapp.dao;
 
-import com.j256.ormlite.dao.Dao;
+import android.content.Context;
 
-import java.sql.SQLException;
-
+import interactivebook.conte.com.br.interactivebookapp.dao.helpers.DaoHelper;
 import interactivebook.conte.com.br.interactivebookapp.model.Usuario;
 
-public class UsuarioDao {
+public class UsuarioDao extends DaoHelper<Usuario> {
 
-    private Dao<Usuario, Integer> usuarioDao;
-    private MyORMLiteHelper helper;
-
-    public UsuarioDao(MyORMLiteHelper helper) {
-        this.helper = helper;
-    }
-
-    public Dao<Usuario, Integer> getProdutoDao() throws SQLException {
-        if(usuarioDao == null){
-            usuarioDao = helper.getDao(Usuario.class);
-        }
-        return usuarioDao;
+    public UsuarioDao(Context c) {
+        super(c, Usuario.class);
     }
 }

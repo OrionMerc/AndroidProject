@@ -23,4 +23,8 @@
     <string name="close_drawer" translatable="false">Fechar</string>
     <string name="nav_menu_config">Condigurações</string>
     <string name="nav_menu_logout">Sair</string>
+    <string name="button_next" translatable="false">></string>
+    <string name="question_text" translatable="false">Qual caminho irá percorrer?</string>
+    <string name="question_i">Direita?</string>
+    <string name="question_ii">Esquerda?</string>
 </resources>

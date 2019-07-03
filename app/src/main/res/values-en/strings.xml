@@ -3,4 +3,6 @@
     <string name="app_name">InteractiveBookApp</string>
     <string name="nav_menu_config">Settings</string>
     <string name="nav_menu_logout">Logout</string>
+    <string name="question_i">Rigth?</string>
+    <string name="question_ii">Left?</string>
 </resources>
