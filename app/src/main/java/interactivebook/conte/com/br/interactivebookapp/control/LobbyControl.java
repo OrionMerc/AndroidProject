@@ -2,10 +2,12 @@ package interactivebook.conte.com.br.interactivebookapp.control;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.content.Intent;
 import android.support.design.widget.NavigationView;
 import android.support.v4.widget.DrawerLayout;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -18,6 +20,8 @@ import interactivebook.conte.com.br.interactivebookapp.R;
 import interactivebook.conte.com.br.interactivebookapp.model.Livro;
 import interactivebook.conte.com.br.interactivebookapp.model.Usuario;
 import interactivebook.conte.com.br.interactivebookapp.resource.LivroResource;
+import interactivebook.conte.com.br.interactivebookapp.view.BookActivity;
+import interactivebook.conte.com.br.interactivebookapp.view.ConfigActivity;
 
 public class LobbyControl {
 
@@ -31,10 +35,10 @@ public class LobbyControl {
     private ListView livrosListView;
     private TextView headerUserTextView;
     private TextView headerEmailTextView;
+    private View rootViewHeader;
 
 
-    View rootViewHeader;
-    public LobbyControl(Activity activity){
+    public LobbyControl(Activity activity) {
         this.activity = activity;
 
         userTextView = this.activity.findViewById(R.id.lobby_user_text_view);
@@ -42,20 +46,21 @@ public class LobbyControl {
 
         LayoutInflater inflater = LayoutInflater.from(this.activity);
         rootViewHeader = inflater.inflate(R.layout.activity_lobby_nav_header, null);
+
         try {
             NavigationView nv = activity.findViewById(R.id.navView);
             headerUserTextView = nv.getHeaderView(0).findViewById(R.id.nav_header_user_textView);
             headerEmailTextView = nv.getHeaderView(0).findViewById(R.id.nav_header_email_textView);
-        }catch (Exception e){
+        } catch (Exception e) {
             System.out.print("Erro: ");
             System.out.println(e.toString());
         }
         livroResource = new LivroResource(this.activity);
-
         getUserData();
+
     }
 
-    private void getUserData(){
+    private void getUserData() {
         this.usuario = (Usuario) this.activity.getIntent().getSerializableExtra("user");
 
         this.userTextView.setText("Bem vindo, " + usuario.getNome() + " " + usuario.getSobrenome());
@@ -65,7 +70,7 @@ public class LobbyControl {
         getLivroFromAPI();
     }
 
-    private void getLivroFromAPI(){
+    private void getLivroFromAPI() {
 
         try {
             livrosAdapter = new ArrayAdapter<>(
@@ -75,10 +80,30 @@ public class LobbyControl {
             );
             livrosListView.setAdapter(livrosAdapter);
 
-            livroResource.buscaLivroPorId(1L, livrosAdapter);
+            livroResource.buscaTodosLivros(livrosAdapter);
 
-        } catch (Exception e){
+            cliqueCurto();
+
+        } catch (Exception e) {
             Toast.makeText(activity, "Falha ao buscar livro", Toast.LENGTH_SHORT).show();
         }
+    }
+
+    public void configActivityAction() {
+        Intent it = new Intent(activity, ConfigActivity.class);
+        it.putExtra("email", usuario.getEmail());
+        activity.startActivity(it);
+    }
+
+    private void cliqueCurto() {
+        livrosListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                livro = livrosAdapter.getItem(i);
+                Intent it = new Intent(activity, BookActivity.class);
+                it.putExtra("livro", livro);
+                activity.startActivity(it);
+            }
+        });
     }
 }

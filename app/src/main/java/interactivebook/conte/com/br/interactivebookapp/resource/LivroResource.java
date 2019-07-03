@@ -6,8 +6,13 @@ import android.widget.ArrayAdapter;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.AsyncHttpResponseHandler;
+
+import java.lang.reflect.Type;
+import java.util.ArrayList;
+import java.util.List;
 
 import cz.msebera.android.httpclient.Header;
 import interactivebook.conte.com.br.interactivebookapp.config.ApiParams;
@@ -56,5 +61,35 @@ public class LivroResource {
                 dlgCarregando.dismiss();
             }
         });
+    }
+
+    public void buscaTodosLivros(final ArrayAdapter<Livro> livrosAdapter){
+
+        client = new AsyncHttpClient();
+
+        dlgCarregando.show();
+
+        client.get(BASE_URL + URL, new AsyncHttpResponseHandler() {
+
+            @Override
+            public void onSuccess(int i, Header[] headers, byte[] bytes) {
+
+                resJSON = new String(bytes);
+                //Usuario usuario;
+                Gson gson = new Gson();
+                //Transforma a resposta em um objeto do tipo Endereco
+                Type usuariosListType = new TypeToken<ArrayList<Livro>>(){}.getType();
+                List<Livro> listLivro = gson.fromJson(resJSON, usuariosListType);
+                livrosAdapter.addAll(listLivro);
+                dlgCarregando.dismiss();
+            }
+
+            @Override
+            public void onFailure(int i, Header[] headers, byte[] bytes, Throwable throwable) {
+                livro = null;
+                dlgCarregando.dismiss();
+            }
+        });
+
     }
 }

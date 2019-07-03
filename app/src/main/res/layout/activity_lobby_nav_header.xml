@@ -24,7 +24,6 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="5dp"
         android:padding="5dp"
-        android:text="Jjjjj"
         android:textColor="#3d5d7c"/>
     <TextView
         android:id="@+id/nav_header_email_textView"
